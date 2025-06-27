@@ -63,7 +63,11 @@ class HeroSection extends StatelessComponent {
             [
               div([
                 starIcon(AppStyles.starIcon),
-              ], classes: AppStyles.heroRatingStars),
+                starIcon(AppStyles.starIcon),
+                starIcon(AppStyles.starIcon),
+                starIcon(AppStyles.starIcon),
+                starIcon(AppStyles.starIcon),
+              ], classes: 'flex gap-0'),
               [
                 text('7240').span(AppStyles.heroRatingTextBold),
                 text(' maker'),

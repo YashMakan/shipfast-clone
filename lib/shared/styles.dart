@@ -106,4 +106,28 @@ class AppStyles {
       'footer-title font-semibold text-base-content tracking-widest text-sm md:text-left mb-3';
   static const footerLinksContainer =
       'flex flex-col justify-center items-center md:items-start gap-2 mb-10 text-sm';
+
+
+
+  // Testimonials Wall
+  static const testimonialWallContainer = 'py-24 px-4 max-w-7xl mx-auto';
+  static const testimonialWallHeader = 'flex flex-col text-center w-full mb-20';
+  static const testimonialWallTitle = 'sm:text-5xl text-4xl font-extrabold text-base-content';
+  static const testimonialWallSubtitle = 'lg:w-2/3 mx-auto leading-relaxed text-base text-base-content/80';
+  static const testimonialList = 'max-w-7xl mx-auto md:columns-2 lg:columns-3 xl:columns-4 space-y-4 md:space-y-6 md:gap-6';
+  static const testimonialListItem = 'break-inside-avoid max-md:flex justify-center';
+
+  // Testimonial Cards
+  static const videoCardContainer = 'max-w-[550px] border border-base-content/20 rounded-xl';
+  static const videoCardInner = 'relative w-full overflow-hidden rounded-t-xl';
+  static const videoCardBanner = 'relative z-20 bg-primary text-primary-content text-lg font-medium p-4 leading-tight select-none rounded-b-xl';
+  static const quoteCard = 'relative h-full w-full max-w-[550px] p-6 rounded-xl border border-base-content/20';
+  static const quoteCardFigcaption = 'relative flex items-center justify-start gap-4 pt-4 mt-4 border-t border-base-content/10';
+  static const quoteCardAvatar = 'w-10 h-10 rounded-full object-cover';
+  static const quoteCardAuthorName = 'text-sm font-medium text-base-content';
+  static const quoteCardAuthorHandle = 'mt-0.5 text-sm text-base-content/60';
+  static const quoteHighlight = 'bg-primary text-primary-content px-0.5';
+
+  // Tweet Card (using RawText, so minimal styling needed here)
+  static const tweetCard = 'break-inside-avoid bg-transparent justify-center h-full max-md:flex';
 }

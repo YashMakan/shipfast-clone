@@ -17,22 +17,38 @@ class ProblemSolutionSection extends StatelessComponent {
               [
                 text('4 hrs').span('text-red-400 font-medium'),
                 text(' to set up emails'),
-              ].p(''),
-              // ... more problem lines
+              ].p(),
+              [
+                text('6 hrs').span('text-red-400 font-medium'),
+                text(' designing a landing page'),
+              ].p(),
+              [
+                text('4 hrs').span('text-red-400 font-medium'),
+                text(' to handle Stripe webhooks'),
+              ].p(),
+              [
+                text('2 hrs').span('text-red-400 font-medium'),
+                text(' for SEO tags'),
+              ].p(),
+              [
+                text('1 hr').span('text-red-400 font-medium'),
+                text(' applying for Google Oauth'),
+              ].p(),
+              [
+                text('3 hrs').span('text-red-400 font-medium'),
+                text(' for DNS records'),
+              ].p(),
+              [
+                text('2 hrs').span('text-red-400 font-medium'),
+                text(' for protected API routes'),
+              ].p(),
               [
                 text('∞ hrs').span('text-red-400 font-medium'),
                 text(' overthinking...'),
-              ].p(''),
-            ].div('text-neutral-content/80 space-y-1'),
-            [
-              [
-                text('= '),
-                text('22+ hours').span('text-red-400 font-medium'),
-                text(' of headaches'),
-              ].p(''),
-              // ... bolt icon
+              ].p(),
+
             ].div(
-                'text-xl font-semibold flex flex-col md:flex-row items-center justify-center gap-3'),
+                'text-neutral-content/80 space-y-1'),
           ].div('leading-relaxed space-y-4 md:space-y-6'),
         ].div(
             'relative bg-neutral text-neutral-content rounded-lg p-8 md:p-16 max-w-lg mx-auto text-center text-lg'),

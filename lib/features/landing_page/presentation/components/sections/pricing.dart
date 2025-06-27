@@ -42,7 +42,48 @@ class PricingSection extends StatelessComponent {
               ],
               cta: 'Get ShipFast',
             ),
-            // ... All-in and Bundle plans
+            _PricingPlan(
+              title: 'Starter',
+              price: '199',
+              originalPrice: '299',
+              features: [
+                'NextJS boilerplate',
+                'SEO & Blog',
+                'Mailgun emails',
+                'Stripe / Lemon Squeezy',
+                'MongoDB / Supabase',
+                'Google Oauth & Magic Links',
+                'Components & animations',
+                'ChatGPT prompts for terms & privacy',
+              ],
+              disabledFeatures: [
+                'Discord community & Leaderboard',
+                '\$1,210 worth of discounts',
+                'Lifetime updates',
+              ],
+              cta: 'Get ShipFast',
+            ),
+            _PricingPlan(
+              title: 'Starter',
+              price: '199',
+              originalPrice: '299',
+              features: [
+                'NextJS boilerplate',
+                'SEO & Blog',
+                'Mailgun emails',
+                'Stripe / Lemon Squeezy',
+                'MongoDB / Supabase',
+                'Google Oauth & Magic Links',
+                'Components & animations',
+                'ChatGPT prompts for terms & privacy',
+              ],
+              disabledFeatures: [
+                'Discord community & Leaderboard',
+                '\$1,210 worth of discounts',
+                'Lifetime updates',
+              ],
+              cta: 'Get ShipFast',
+            ),
           ].div(
               'relative flex flex-col lg:flex-row items-center lg:items-stretch gap-8'),
           // ... another testimonial

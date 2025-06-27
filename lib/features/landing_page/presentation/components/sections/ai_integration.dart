@@ -20,7 +20,7 @@ class AiIntegrationSection extends StatelessComponent {
 
     yield DomComponent(
       tag: 'section',
-      classes: AppStyles.sectionLight,
+      classes: 'bg-base-100',
       children: [
         [
           [

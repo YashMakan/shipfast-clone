@@ -14,6 +14,7 @@ class FeaturesSection extends StatefulComponent {
 class _FeaturesSectionState extends State<FeaturesSection> {
   final _features = [
     {
+      'id': 0,
       'title': 'Emails',
       'icon': emailIcon,
       'content': [
@@ -35,21 +36,135 @@ class _FeaturesSectionState extends State<FeaturesSection> {
         },
       ]
     },
-    // ... other feature maps for Payments, Login, etc.
+    {
+      'id': 1,
+      'title': 'Emails',
+      'icon': emailIcon,
+      'content': [
+        'Send transactional emails',
+        'DNS setup to avoid spam folder (DKIM, DMARC, SPF in subdomain)',
+        'Webhook to receive & forward emails',
+      ],
+      'timeSaved': '3 hours',
+      'integrations': [
+        {
+          'name': 'Mailgun',
+          'logo': '/images/mailgun.459dea11.png',
+          'url': 'https://www.mailgun.com/'
+        },
+        {
+          'name': 'Resend',
+          'logo': '/images/resend_square.ad1418c0.png',
+          'url': 'https://resend.com/'
+        },
+      ]
+    },
+    {
+      'id': 2,
+      'title': 'Emails',
+      'icon': emailIcon,
+      'content': [
+        'Send transactional emails',
+        'DNS setup to avoid spam folder (DKIM, DMARC, SPF in subdomain)',
+        'Webhook to receive & forward emails',
+      ],
+      'timeSaved': '3 hours',
+      'integrations': [
+        {
+          'name': 'Mailgun',
+          'logo': '/images/mailgun.459dea11.png',
+          'url': 'https://www.mailgun.com/'
+        },
+        {
+          'name': 'Resend',
+          'logo': '/images/resend_square.ad1418c0.png',
+          'url': 'https://resend.com/'
+        },
+      ]
+    },
+    {
+      'id': 3,
+      'title': 'Emails',
+      'icon': emailIcon,
+      'content': [
+        'Send transactional emails',
+        'DNS setup to avoid spam folder (DKIM, DMARC, SPF in subdomain)',
+        'Webhook to receive & forward emails',
+      ],
+      'timeSaved': '3 hours',
+      'integrations': [
+        {
+          'name': 'Mailgun',
+          'logo': '/images/mailgun.459dea11.png',
+          'url': 'https://www.mailgun.com/'
+        },
+        {
+          'name': 'Resend',
+          'logo': '/images/resend_square.ad1418c0.png',
+          'url': 'https://resend.com/'
+        },
+      ]
+    },
+    {
+      'id': 4,
+      'title': 'Emails',
+      'icon': emailIcon,
+      'content': [
+        'Send transactional emails',
+        'DNS setup to avoid spam folder (DKIM, DMARC, SPF in subdomain)',
+        'Webhook to receive & forward emails',
+      ],
+      'timeSaved': '3 hours',
+      'integrations': [
+        {
+          'name': 'Mailgun',
+          'logo': '/images/mailgun.459dea11.png',
+          'url': 'https://www.mailgun.com/'
+        },
+        {
+          'name': 'Resend',
+          'logo': '/images/resend_square.ad1418c0.png',
+          'url': 'https://resend.com/'
+        },
+      ]
+    },
+    {
+      'id': 5,
+      'title': 'Emails',
+      'icon': emailIcon,
+      'content': [
+        'Send transactional emails',
+        'DNS setup to avoid spam folder (DKIM, DMARC, SPF in subdomain)',
+        'Webhook to receive & forward emails',
+      ],
+      'timeSaved': '3 hours',
+      'integrations': [
+        {
+          'name': 'Mailgun',
+          'logo': '/images/mailgun.459dea11.png',
+          'url': 'https://www.mailgun.com/'
+        },
+        {
+          'name': 'Resend',
+          'logo': '/images/resend_square.ad1418c0.png',
+          'url': 'https://resend.com/'
+        },
+      ]
+    },
   ];
 
-  late String _selectedFeature;
+  late int _selectedFeature;
 
   @override
   void initState() {
     super.initState();
-    _selectedFeature = _features.first['title'] as String;
+    _selectedFeature = _features.first['id'] as int;
   }
 
   @override
   Iterable<Component> build(BuildContext context) sync* {
     final selectedFeatureData =
-        _features.firstWhere((f) => f['title'] == _selectedFeature);
+        _features.firstWhere((f) => f['id'] == _selectedFeature);
 
     yield DomComponent(
       tag: 'section',
@@ -72,9 +187,9 @@ class _FeaturesSectionState extends State<FeaturesSection> {
               _FeatureTab(
                 title: feature['title'] as String,
                 iconBuilder: feature['icon'] as Component Function(String),
-                isSelected: _selectedFeature == feature['title'],
+                isSelected: _selectedFeature == feature['id'],
                 onPressed: () => setState(
-                    () => _selectedFeature = feature['title'] as String),
+                    () => _selectedFeature = feature['id'] as int),
               )
           ].div(
               'grid grid-cols-4 md:flex justify-start gap-4 md:gap-12 max-md:px-8 max-w-3xl mx-auto mb-8'),

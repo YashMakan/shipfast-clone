@@ -10,7 +10,7 @@ class DemoSection extends StatelessComponent {
     yield DomComponent(
       tag: 'section',
       id: 'demo',
-      classes: AppStyles.sectionLight,
+      classes: 'bg-base-100',
       children: [
         [
           [

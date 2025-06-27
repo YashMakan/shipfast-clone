@@ -321,6 +321,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.19.1"
+  jaspr_router:
+    dependency: "direct main"
+    description:
+      name: jaspr_router
+      sha256: d9c9dd28b759709c5e37afaef64fb98e1821f162b9dbc96f51db9d42181cda3b
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.0"
   jaspr_tailwind:
     dependency: "direct dev"
     description:

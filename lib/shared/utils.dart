@@ -10,8 +10,8 @@ class StatelessWidget {
     throw UnimplementedError();
   }
 
-  Iterable<Component> component(context) sync* {
-    yield build(context);
+  Component component(context)  {
+    return build(context);
   }
 }
 

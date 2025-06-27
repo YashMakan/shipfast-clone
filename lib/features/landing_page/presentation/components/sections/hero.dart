@@ -48,10 +48,9 @@ class HeroSection extends StatelessComponent {
             [
               salesBannerIcon(AppStyles.salesBannerIcon),
               [
-                text('\$100').span('text-accent'),
-                text(' off'),
+                text('\$100 off').span('text-accent'),
               ].span(''),
-              text(' for the first '),
+              text('for the first '),
               text('7250'),
               text(' customers ('),
               text('10'),

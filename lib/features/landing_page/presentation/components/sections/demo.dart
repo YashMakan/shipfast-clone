@@ -31,7 +31,7 @@ class DemoSection extends StatelessWidget {
               child: Group(
                 children: [
                   Image(
-                    src: '/assets/maker.png',
+                    src: 'assets/maker.png',
                     alt: 'Marc Lou — Product Hunt Maker of the Year 2023',
                     style: avatarStyle,
                   ),

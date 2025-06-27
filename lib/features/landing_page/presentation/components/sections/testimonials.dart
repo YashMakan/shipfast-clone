@@ -27,7 +27,7 @@ class TestimonialSection1 extends StatelessWidget {
         child: Group(
           children: [
             Image(
-              src: '/assets/mrr.png',
+              src: 'assets/mrr.png',
               alt: 'PostBridge MRR screenshot',
               style: imageStyle,
             ),
@@ -44,7 +44,7 @@ class TestimonialSection1 extends StatelessWidget {
                     child: Group(
                       children: [
                         Image(
-                          src: '/assets/jackpfp.38e84582.png',
+                          src: 'assets/jackpfp.38e84582.png',
                           alt: 'Jack Friks testimonial for ShipFast',
                           style: authorAvatarStyle,
                         ),

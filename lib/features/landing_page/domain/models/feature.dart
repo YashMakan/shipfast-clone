@@ -36,12 +36,12 @@ List<Feature> get defaultFeatures => List.generate(
     integrations: [
       Integration(
         name: 'Mailgun',
-        logo: '/assets/mailgun.459dea11.png',
+        logo: 'assets/mailgun.459dea11.png',
         url: 'https://www.mailgun.com/',
       ),
       Integration(
         name: 'Resend',
-        logo: '/assets/resend_square.ad1418c0.png',
+        logo: 'assets/resend_square.ad1418c0.png',
         url: 'https://resend.com/',
       ),
     ],

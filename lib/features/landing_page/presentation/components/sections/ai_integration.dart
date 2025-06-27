@@ -48,7 +48,7 @@ class AiIntegrationSection extends StatelessWidget {
                 child: Group(
                   children: [
                     Image(
-                      src: '/assets/logo.png',
+                      src: 'assets/logo.png',
                       alt: 'ShipFast logo',
                       style: 'w-36 md:w-52 mx-auto drop-shadow',
                     ),

@@ -1,96 +1,56 @@
-// lib/landing_page.dart (or a new file like lib/components/testimonials.dart)
-
 import 'package:jaspr/jaspr.dart';
-import 'package:shipfast_clone/shared/components/figcaption.dart';
-import 'package:shipfast_clone/shared/extensions.dart';
+import 'package:shipfast_clone/features/landing_page/domain/models/testimonial_data.dart';
 import 'package:shipfast_clone/shared/styles.dart';
-import 'package:shipfast_clone/shared/svg_icons.dart'; // Assuming you have this
+import 'package:shipfast_clone/shared/svg_icons.dart';
+import 'package:shipfast_clone/shared/utils.dart';
 
-//region Data Models
-abstract class TestimonialData {
-  const TestimonialData();
-}
-
-class VideoTestimonialData extends TestimonialData {
-  final String poster;
-  final String videoSrc;
-  final String author;
-  final String quote;
-
-  const VideoTestimonialData({
-    required this.poster,
-    required this.videoSrc,
-    required this.author,
-    required this.quote,
-  });
-}
-
-class QuoteTestimonialData extends TestimonialData {
-  final String? image;
-  final List<Component> quote;
-  final String authorName;
-  final String? authorHandle;
-  final String? authorAvatar;
-  final String? reviewUrl;
-  final String cardBgClass;
-
-  const QuoteTestimonialData({
-    this.image,
-    required this.quote,
-    required this.authorName,
-    this.authorHandle,
-    this.authorAvatar,
-    this.reviewUrl,
-    this.cardBgClass = 'bg-base-100',
-  });
-}
-
-// Main Section Component
-class TestimonialsWallSection extends StatelessComponent {
+class TestimonialsWallSection extends StatelessWidget {
   const TestimonialsWallSection({super.key});
 
-  // Data for all testimonials is managed here
-  static final _testimonials = <TestimonialData>[
-    VideoTestimonialData(
-      poster: 'https://d1wkquwg5s1b04.cloudfront.net/landing/jack2.jpg',
-      videoSrc: 'https://d1wkquwg5s1b04.cloudfront.net/landing/jack2.mp4',
-      author: 'Jack F.',
-      quote: 'I shipped in 6 days as a noob coder... This is awesome',
-    ),
-    QuoteTestimonialData(
-      quote: [
-        text(
-            'Really easy to use. The tutorials are really useful and explains how everything works. Hope to ship my next project really fast!')
-      ],
-      authorName: 'Sergiu Chiriac',
-      authorHandle: '@sergiu',
-      authorAvatar: '/_next/static/media/sergiu.9d908463.jpeg',
-      reviewUrl: 'https://www.producthunt.com/posts/shipfast-2?comment=2707228',
-      cardBgClass: 'bg-[#2d1e1a]',
-    ),
-    // ... Add all other testimonials to this list
-  ];
+  static const _sectionClass = AppStyles.sectionDark;
+  static const _headerWrapperClass = 'flex flex-col text-center w-full mb-20';
+  static const _titleClass = AppStyles.testimonialWallTitle;
+  static const _subtitleClass = AppStyles.testimonialWallSubtitle;
+  static const _listClass = AppStyles.testimonialList;
+  static const _itemClass = AppStyles.testimonialListItem;
+
+  static final _testimonials = defaultTestimonials;
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield DomComponent(
-      tag: 'section',
+  Component render(BuildContext context) {
+    return Section(
       id: 'testimonials',
-      classes: AppStyles.sectionDark,
-      children: [
-        [
-          [
-            text('7240 makers built AI tools, SaaS, and more')
-                .h2(AppStyles.testimonialWallTitle),
-          ].div('mb-8'),
-          text('They made their first \$ online, and some even quit their 9-5!')
-              .p(AppStyles.testimonialWallSubtitle),
-        ].div('flex flex-col text-center w-full mb-20'),
-        [
-          for (final testimonial in _testimonials)
-            _buildTestimonial(testimonial).li(AppStyles.testimonialListItem)
-        ].ul(AppStyles.testimonialList, attributes: {'role': 'list'}),
-      ],
+      style: _sectionClass,
+      child: Group(children: [
+        Div(
+          style: _headerWrapperClass,
+          child: Group(children: [
+            Div(
+              style: 'mb-8',
+              child: H2(
+                style: _titleClass,
+                child: Text('7240 makers built AI tools, SaaS, and more'),
+              ),
+            ),
+            Paragraph(
+              style: _subtitleClass,
+              child: Text(
+                  'They made their first \$ online, and some even quit their 9-5!'),
+            ),
+          ]),
+        ),
+        UnorderedList(
+          style: _listClass,
+          attributes: {'role': 'list'},
+          children: [
+            for (final testimonial in _testimonials)
+              ListItem(
+                style: _itemClass,
+                child: _buildTestimonial(testimonial),
+              ),
+          ],
+        ),
+      ]),
     );
   }
 
@@ -101,98 +61,146 @@ class TestimonialsWallSection extends StatelessComponent {
     if (data is QuoteTestimonialData) {
       return _QuoteTestimonial(data: data);
     }
-    return text('Unknown testimonial type');
+    return Text('Unknown testimonial type');
   }
 }
 
-//region Testimonial Card Components
-class _VideoTestimonial extends StatelessComponent {
+class _VideoTestimonial extends StatelessWidget {
   const _VideoTestimonial({required this.data});
 
   final VideoTestimonialData data;
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield [
-      [
-        video(
-          classes: 'w-full',
-          poster: data.poster,
-          preload: Preload.metadata,
-          attributes: {'playsinline': ''},
-          [
-            source(src: data.videoSrc, type: 'video/mp4'),
-            text('Your browser does not support the video tag.'),
-          ],
-        ),
-        div([],
-            classes:
-                'absolute bottom-0 -inset-x-4 border bg-base-200/50 blur-lg h-24 translate-y-1/4 animate-opacity'),
-        [
-          [
-            button(
-              classes: 'group',
-              type: ButtonType.button,
-              attributes: {'title': 'Play video'},
-              [
-                playIcon(
-                    'stroke-gray-50 group-hover:scale-[1.05] duration-100 ease-in drop-shadow-lg animate-opacity')
-              ],
+  Component render(BuildContext context) {
+    return Div(
+      style: AppStyles.videoCardContainer,
+      child: Group(children: [
+        Div(
+          style: AppStyles.videoCardInner,
+          child: Group(children: [
+            Video(
+              style: 'w-full',
+              poster: Uri.parse(data.poster),
+              preload: Preload.metadata,
+              attributes: {'playsinline': ''},
+              source: Uri.parse(data.videoSrc),
             ),
-            [
-              text(data.author).p('text-gray-50 font-medium drop-shadow'),
-              [
-                for (var i = 0; i < 5; i++)
-                  starIcon('w-5 h-5 text-primary drop-shadow')
-              ].div('rating'),
-            ].div('animate-opacity text-right'),
-          ].div('flex justify-between items-end p-4'),
-        ].div('absolute w-full bottom-0 z-50'),
-      ].div(AppStyles.videoCardInner),
-      [text(data.quote)].div(AppStyles.videoCardBanner),
-    ].div(AppStyles.videoCardContainer);
+            Div(
+                style:
+                    'absolute bottom-0 -inset-x-4 border bg-base-200/50 blur-lg h-24 translate-y-1/4 animate-opacity'),
+            Div(
+              style: 'absolute w-full bottom-0 z-50',
+              child: Group(children: [
+                Div(
+                  style: 'flex justify-between items-end p-4',
+                  child: Group(children: [
+                    Button(
+                      style: 'group',
+                      type: ButtonType.button,
+                      attributes: {'title': 'Play video'},
+                      child: playIcon(
+                        'stroke-gray-50 group-hover:scale-[1.05] duration-100 ease-in drop-shadow-lg animate-opacity',
+                      ),
+                    ),
+                    Div(
+                      style: 'animate-opacity text-right',
+                      child: Group(children: [
+                        Paragraph(
+                          style: 'text-gray-50 font-medium drop-shadow',
+                          child: Text(data.author),
+                        ),
+                        Div(
+                          style: 'rating',
+                          child: Group(
+                            children: List.generate(
+                              5,
+                              (_) =>
+                                  starIcon('w-5 h-5 text-primary drop-shadow'),
+                            ),
+                          ),
+                        ),
+                      ]),
+                    ),
+                  ]),
+                ),
+              ]),
+            ),
+          ]),
+        ),
+        Div(
+          style: AppStyles.videoCardBanner,
+          child: Text(data.quote),
+        ),
+      ]),
+    );
   }
 }
 
-class _QuoteTestimonial extends StatelessComponent {
+class _QuoteTestimonial extends StatelessWidget {
   const _QuoteTestimonial({required this.data});
 
   final QuoteTestimonialData data;
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield [
-      blockquote(
-        classes: 'relative',
-        [data.quote.div('text-base xl:text-sm text-base-content')],
-      ),
-      figcaption([
-        div([
-          if (data.authorAvatar != null)
-            img(
-                src: data.authorAvatar!,
-                alt: "${data.authorName}'s testimonial for ShipFast",
-                classes: AppStyles.quoteCardAvatar)
-          else
-            text(data.authorName.substring(0, 1)).span(
-                'w-10 h-10 rounded-full flex justify-center items-center text-lg font-medium bg-base-300'),
-        ], classes: 'overflow-hidden rounded-full bg-base-300 shrink-0'),
-        [
-          div([
-            text(data.authorName).div(AppStyles.quoteCardAuthorName),
-            if (data.authorHandle != null)
-              text(data.authorHandle!).div(AppStyles.quoteCardAuthorHandle),
+  Component render(BuildContext context) {
+    return Figure(
+      style: '${AppStyles.quoteCard} ${data.cardBgClass}',
+      child: Group(children: [
+        BlockQuote(
+          style: 'relative',
+          child: Div(
+            style: 'text-base xl:text-sm text-base-content',
+            child: Group(children: data.quote),
+          ),
+        ),
+        Figcaption(
+          style: AppStyles.quoteCardFigcaption,
+          child: Group(children: [
+            Div(
+                style: 'overflow-hidden rounded-full bg-base-300 shrink-0',
+                child: Group(children: [
+                  if (data.authorAvatar != null)
+                    Image(
+                      src: data.authorAvatar!,
+                      alt: "${data.authorName}'s testimonial for ShipFast",
+                      style: AppStyles.quoteCardAvatar,
+                    )
+                  else
+                    Span(
+                      style:
+                          'w-10 h-10 rounded-full flex justify-center items-center text-lg font-medium bg-base-300',
+                      child: Text(data.authorName.substring(0, 1)),
+                    ),
+                ])),
+            Div(
+                style: 'w-full flex items-end justify-between gap-2',
+                child: Group(children: [
+                  Div(
+                      child: Group(children: [
+                    Div(
+                      style: AppStyles.quoteCardAuthorName,
+                      child: Text(data.authorName),
+                    ),
+                    if (data.authorHandle != null)
+                      Div(
+                        style: AppStyles.quoteCardAuthorHandle,
+                        child: Text(data.authorHandle!),
+                      ),
+                  ])),
+                  if (data.reviewUrl != null)
+                    Link(
+                      href: data.reviewUrl!,
+                      target: Target.blank,
+                      attributes: {
+                        'aria-label': 'See user review on Product Hunt',
+                      },
+                      style: 'shrink-0',
+                      child: phIcon('w-6 h-6'),
+                    ),
+                ])),
           ]),
-          if (data.reviewUrl != null)
-            phIcon('w-6 h-6').a(
-              'shrink-0',
-              href: data.reviewUrl ?? '',
-              target: '_blank',
-              attributes: {'aria-label': 'See user review on Product Hunt'},
-            ),
-        ].div('w-full flex items-end justify-between gap-2'),
-      ], classes: AppStyles.quoteCardFigcaption),
-    ].figure('${AppStyles.quoteCard} ${data.cardBgClass}');
+        ),
+      ]),
+    );
   }
 }
-

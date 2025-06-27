@@ -1,13 +1,14 @@
 import 'package:jaspr/jaspr.dart';
+import 'package:shipfast_clone/shared/utils.dart';
 
 import 'sections/_sections.dart';
 
-class MainContent extends StatelessComponent {
+class MainContent extends StatelessWidget {
   const MainContent({super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield DomComponent(
+  Component render(BuildContext context) {
+    return DomComponent(
       tag: 'main',
       classes: 'min-h-screen',
       children: [

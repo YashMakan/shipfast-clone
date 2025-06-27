@@ -6,7 +6,7 @@ class App extends StatelessComponent {
   @override
   Iterable<Component> build(BuildContext context) sync* {
     yield Router(routes: [
-      Route(path: '/', builder: (context, state) => LandingPage().component(context)),
+      Route(path: '/', builder: (context, state) => LandingPage()),
     ]);
   }
 }

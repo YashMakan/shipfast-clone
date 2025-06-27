@@ -1,61 +1,99 @@
 import 'package:jaspr/jaspr.dart';
 import 'package:shipfast_clone/shared/extensions.dart';
-import 'package:shipfast_clone/shared/styles.dart';
+import 'package:shipfast_clone/shared/utils.dart';
 
-class AiIntegrationSection extends StatelessComponent {
+class AiIntegrationSection extends StatelessWidget {
   const AiIntegrationSection({super.key});
 
-  @override
-  Iterable<Component> build(BuildContext context) sync* {
-    final logos = [
-      {'alt': 'Github Copilot', 'src': 'images/copilot.png'},
-      {'alt': 'Cursor', 'src': 'images/cursor.png'},
-      {'alt': 'Claude', 'src': 'images/claude.png'},
-      {'alt': 'ChatGPT', 'src': 'images/openai.png'},
-      {'alt': 'Windsurf', 'src': 'images/windsurf.png'},
-      {'alt': 'Gemini', 'src': 'images/gemini.png'},
-      {'alt': 'Grok', 'src': 'images/grok.png'},
-      {'alt': 'Deepseek', 'src': 'images/deepseek.png'},
-    ];
+  // Styles
+  static const sectionStyle = 'bg-base-100';
+  static const containerStyle =
+      'py-12 max-md:px-8 max-w-3xl mx-auto md:space-y-8 space-y-6';
+  static const centerRow = 'mx-auto text-center flex justify-center';
+  static const mainText = 'text-center text-3xl md:text-4xl';
+  static const aiLogoImage =
+      'w-12 h-12 md:w-16 md:h-16 rounded-lg shadow aspect-square';
+  static const heroText = 'text-center text-2xl md:text-4xl font-bold';
+  static const highlight =
+      'text-neutral bg-neutral-content px-1 md:px-1.5 tracking-wide';
+  static const annotationLeft =
+      'max-md:hidden absolute text-accent translate-x-2/3 -translate-y-1/2 rotate-6 top-0 right-0 text-sm font-mono';
+  static const annotationRight =
+      'max-md:hidden absolute text-accent translate-x-full -translate-y-1/2 rotate-6 -top-3 -right-1 text-sm font-mono';
 
-    yield DomComponent(
-      tag: 'section',
-      classes: 'bg-base-100',
-      children: [
-        [
-          [
-            [
-              img(
-                  src: '/images/logo.png',
-                  alt: 'ShipFast logo',
-                  classes: 'w-36 md:w-52 mx-auto drop-shadow'),
-              text('codebase').p(
-                  'max-md:hidden absolute text-accent translate-x-2/3 -translate-y-1/2 rotate-6 top-0 right-0 text-sm font-mono'),
-            ].div('relative'),
-          ].div('mx-auto text-center flex justify-center'),
-          text('+').p('text-center text-3xl md:text-4xl !mt-5'),
-          [
-            for (final logo in logos)
-              [
-                img(
-                    alt: logo['alt']!,
-                    src: logo['src']!,
-                    classes:
-                        'w-12 h-12 md:w-16 md:h-16 rounded-lg shadow aspect-square'),
-              ].div('relative'),
-            text('AI').p(
-                'max-md:hidden absolute text-accent translate-x-full -translate-y-1/2 rotate-6 -top-3 -right-1 text-sm font-mono'),
-          ].div('flex flex-wrap justify-center gap-4 relative'),
-          text('=').p('text-center text-3xl md:text-4xl'),
-          [
-            [
-              text('Launch your idea'),
-              text('INSTANTLY').span(
-                  'text-neutral bg-neutral-content px-1 md:px-1.5 tracking-wide'),
-            ].p('text-center text-2xl md:text-4xl font-bold'),
-          ].div('mx-auto text-center'),
-        ].div('py-12 max-md:px-8 max-w-3xl mx-auto md:space-y-8 space-y-6'),
-      ],
+  static final logos = [
+    {'alt': 'Github Copilot', 'src': 'assets/copilot.png'},
+    {'alt': 'Cursor', 'src': 'assets/cursor.png'},
+    {'alt': 'Claude', 'src': 'assets/claude.png'},
+    {'alt': 'ChatGPT', 'src': 'assets/openai.png'},
+    {'alt': 'Windsurf', 'src': 'assets/windsurf.png'},
+    {'alt': 'Gemini', 'src': 'assets/gemini.png'},
+    {'alt': 'Grok', 'src': 'assets/grok.png'},
+    {'alt': 'Deepseek', 'src': 'assets/deepseek.png'},
+  ];
+
+  @override
+  Component render(BuildContext context) {
+    return Section(
+      style: sectionStyle,
+      child: Div(
+        style: containerStyle,
+        child: Group(
+          children: [
+            // ShipFast Logo + Label
+            Div(
+              style: centerRow,
+              child: Div(
+                style: 'relative',
+                child: Group(
+                  children: [
+                    Image(
+                      src: '/assets/logo.png',
+                      alt: 'ShipFast logo',
+                      style: 'w-36 md:w-52 mx-auto drop-shadow',
+                    ),
+                    Text('codebase').p(annotationLeft),
+                  ],
+                ),
+              ),
+            ),
+
+            // Plus sign
+            Text('+').p('$mainText !mt-5'),
+
+            // AI Logos row
+            Div(
+              style: 'flex flex-wrap justify-center gap-4 relative',
+              child: Group(
+                children: [
+                  for (final logo in logos)
+                    Image(
+                      src: logo['src']!,
+                      alt: logo['alt']!,
+                      style: aiLogoImage,
+                    ).div('relative'),
+                  Text('AI').p(annotationRight),
+                ],
+              ),
+            ),
+
+            // Equals sign
+            Text('=').p(mainText),
+
+            // Result: Launch instantly
+            Div(
+                style: 'mx-auto text-center',
+                child: Paragraph(
+                    style: heroText,
+                    child: Group(
+                      children: [
+                        Text('Launch your idea '),
+                        Text('INSTANTLY').span(highlight),
+                      ],
+                    ))),
+          ],
+        ),
+      ),
     );
   }
 }
